@@ -1,19 +1,17 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
-const fs = require('fs');
-const path = require('path');
+import { EggAppConfig, EggAppInfo, PowerPartial } from "egg";
+const fs = require("fs");
+const path = require("path");
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1579574404231_7633';
+  config.keys = appInfo.name + "_1579574404231_7633";
 
   // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
   // add your egg config in here
-  config.middleware = [
-    'proxy'
-  ];
+  config.middleware = ["proxy"];
 
   // add your special config in here
   const bizConfig = {
@@ -24,15 +22,15 @@ export default (appInfo: EggAppInfo) => {
   // ! 监听ip
   config.cluster = {
     listen: {
-      path: '',
+      path: "",
       port: 7000,
-      hostname: '127.0.0.1',
-    }
+      hostname: "127.0.0.1",
+    },
   };
 
   // ! 本地代理
   config.proxy = {
-    host: 'http://127.0.0.1:8000',
+    host: "http://127.0.0.1:8000",
     match: /^\/api\//,
   };
 
@@ -46,23 +44,23 @@ export default (appInfo: EggAppInfo) => {
 
   // ? 404页面
   config.notfound = {
-    pageUrl: '/404.html',
+    pageUrl: "/404.html",
   };
 
   // ? 显示html模板框架
   config.view = {
-    defaultViewEngine: 'nunjucks',
+    defaultViewEngine: "nunjucks",
     mapping: {
-      '.html': 'nunjucks',
+      ".html": "nunjucks",
     },
   };
 
   // * 静态资源配置
   config.static = {
-    prefix: '/',
+    prefix: "/",
     dir: [
-      path.join(__dirname, '../app/view'),
-      path.join(__dirname, '../app/public'),
+      path.join(__dirname, "../app/view"),
+      path.join(__dirname, "../app/public"),
     ], // `String` or `Array:[dir1, dir2, ...]` 静态化目录,可以设置多个静态化目录
     dynamic: true, // 如果当前访问的静态资源没有缓存，则缓存静态文件，和`preload`配合使用；
     preload: false,
@@ -72,7 +70,9 @@ export default (appInfo: EggAppInfo) => {
 
   // * favicon图标
   config.siteFile = {
-    '/favicon.ico': fs.readFileSync(path.join(__dirname, '../app/public/favicon.ico')),
+    "/favicon.ico": fs.readFileSync(
+      path.join(__dirname, "../app/public/favicon.png")
+    ),
   };
 
   // the return config will combines to EggAppConfig
