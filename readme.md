@@ -21,11 +21,7 @@ npm init egg --type=ts
 
 # `添加配置`
 
-    yarn
-
-    koa-proxy
-    egg-view-nunjucks
-    egg-cors
+    yarn add  koa-proxy egg-view-nunjucks egg-cors --dev
 
 # `环境变量`
 
